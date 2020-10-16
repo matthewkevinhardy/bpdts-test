@@ -44,8 +44,8 @@ public class BpdtsApplicationTest {
 	@Test
 	public void getCityListedUsers() throws Exception {
 		this.mockMvc.perform(get("/bpdts-test/getCityListedUsers")
-				.param("city", "London"))
-				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(135)));
+				.param("city", "Reading"))
+				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(83)));
 	}
 	
 	@Test
