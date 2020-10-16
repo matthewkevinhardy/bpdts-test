@@ -64,6 +64,20 @@ public class User {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+	
+	private static final double DEGREES_TO_MILES = 69.2;
+	
+	public boolean isWithinRadius(double lat, double lng, double maxRadiusMiles) {
+		double x = this.latitude-lat;
+		double y = this.longitude-lng;
+		double radiusMiles = Math.sqrt(x*x+y*y)*DEGREES_TO_MILES;
+		
+		if(radiusMiles<=maxRadiusMiles) {
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
