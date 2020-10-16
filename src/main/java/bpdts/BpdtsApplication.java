@@ -1,6 +1,9 @@
 package bpdts;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,18 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-public class TestApp {
+public class BpdtsApplication {
 
-	private static final Logger LOG = LoggerFactory.getLogger(TestApp.class);
+	private static final Logger LOG = LoggerFactory.getLogger(BpdtsApplication.class);
 
-	private static final double LONDON_LATITUDE = 51.5074;
-	private static final double LONDON_LONGITUDE = 0.1278;
-	
+	public static final double LONDON_LATITUDE = 51.509865;
+	public static final double LONDON_LONGITUDE = -0.118092;
+
 	public static void main(String[] args) {
-		SpringApplication.run(TestApp.class, args);
+		SpringApplication.run(BpdtsApplication.class, args);
 	}
-	
-	
 
 	@Autowired
 	private BpdtsService bpdtsService;
@@ -55,4 +56,11 @@ public class TestApp {
 		}
 	}
 
+	@RestController
+	class RootController {
+		@RequestMapping(value = "/")
+		public void redirect(HttpServletResponse response) throws IOException {
+			response.sendRedirect("/swagger-ui.html");
+		}
+	}
 }

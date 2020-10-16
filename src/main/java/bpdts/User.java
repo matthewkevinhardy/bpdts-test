@@ -4,22 +4,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 	
+	@JsonProperty("id")
 	private long id;
     
 	@JsonProperty("first_name")
 	private String firstName;
     
     @JsonProperty("last_name")
-    private String lastName; //"last_name": "Boam",
+    private String lastName; 
     
-    private String email;//": "mboam3q@thetimes.co.uk",
+    @JsonProperty("email")
+    private String email;
     
     @JsonProperty("ip_address")
-    private String ipAddress;///"ip_address": "113.71.242.187",
+    private String ipAddress;
     
-    private double latitude;//"latitude": -6.5115909,
+    @JsonProperty("latitude")
+    private double latitude;
     
-    private double longitude;//"longitude": 105.652983
+    @JsonProperty("longitude")
+    private double longitude;
 	
     public long getId() {
 		return id;

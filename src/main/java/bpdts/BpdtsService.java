@@ -27,14 +27,4 @@ public class BpdtsService {
 
 		return usersWithinRadius;
 	}
-	
-//	private static class RadiusPredicate implements Predicate<User>  {
-//
-//		@Override
-//		public boolean test(User t) {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-//		
-//	}
 }
