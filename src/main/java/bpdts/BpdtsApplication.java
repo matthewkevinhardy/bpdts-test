@@ -23,7 +23,8 @@ public class BpdtsApplication {
 
 	public static final double LONDON_LATITUDE = 51.509865;
 	public static final double LONDON_LONGITUDE = -0.118092;
-
+	public static final String LONDON = "London";
+	
 	public static void main(String[] args) {
 		SpringApplication.run(BpdtsApplication.class, args);
 	}
@@ -49,10 +50,22 @@ public class BpdtsApplication {
 			return bpdtsService.getUsersWithinRadius(lat, lng, radMiles);
 		}
 
-		@GetMapping(path = "/getUsersWithinLondon", produces = MediaType.APPLICATION_JSON_VALUE)
+		@GetMapping(path = "/getUsersWithinLondonRadius", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getUsersWithinLondon(@RequestParam(value = "radMiles", required = true) double radMiles) {
 
 			return bpdtsService.getUsersWithinRadius(LONDON_LATITUDE, LONDON_LONGITUDE, radMiles);
+		}
+		
+		@GetMapping(path = "/getCityListedUsers", produces = MediaType.APPLICATION_JSON_VALUE)
+		public List<User> getCityListedUsers(@RequestParam(value = "city", required = true) String city) {
+
+			return bpdtsService.getCityListedUsers(city);
+		}
+		
+		@GetMapping(path = "/getLondonListedUsers", produces = MediaType.APPLICATION_JSON_VALUE)
+		public List<User> getLondonListedUsers() {
+
+			return bpdtsService.getCityListedUsers(LONDON);
 		}
 	}
 

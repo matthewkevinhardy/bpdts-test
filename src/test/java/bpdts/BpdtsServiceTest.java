@@ -27,4 +27,9 @@ public class BpdtsServiceTest {
 		assertThat(bpdtsService.getUsersWithinRadius(BpdtsApplication.LONDON_LATITUDE,
 				BpdtsApplication.LONDON_LONGITUDE, 20)).isNotEmpty();
 	}
+	
+	@Test
+	public void getCityListedUsers() throws Exception {
+		assertThat(bpdtsService.getCityListedUsers(BpdtsApplication.LONDON)).isNotEmpty();
+	}
 }

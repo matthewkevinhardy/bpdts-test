@@ -18,7 +18,11 @@ public class BpdtsService {
 	public List<User> getAllUsers() {
 		return this.webClient.get().uri("/users").retrieve().bodyToFlux(User.class).collectList().block();
 	}
-
+	
+	public List<User> getCityListedUsers(String city) {
+		return this.webClient.get().uri("/city/{city}/users",city).retrieve().bodyToFlux(User.class).collectList().block();
+	}
+	
 	public List<User> getUsersWithinRadius(double lat, double lng, double radMiles) {
 		List<User> allUsers = getAllUsers();
 
