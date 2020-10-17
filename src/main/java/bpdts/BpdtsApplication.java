@@ -36,13 +36,13 @@ public class BpdtsApplication {
 	@RequestMapping("bpdts-test")
 	class BpdtsController {
 
-		@GetMapping(path = "/getAllUsers", produces = MediaType.APPLICATION_JSON_VALUE)
+		@GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getAllUsers() {
 
 			return bpdtsService.getAllUsers();
 		}
 
-		@GetMapping(path = "/getUsersWithinRadius", produces = MediaType.APPLICATION_JSON_VALUE)
+		@GetMapping(path = "/coords/users", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getUsersWithinRadius(@RequestParam(value = "lat", required = true) double lat,
 				@RequestParam(value = "lng", required = true) double lng,
 				@RequestParam(value = "radMiles", required = true) double radMiles) {

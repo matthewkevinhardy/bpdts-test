@@ -2,6 +2,7 @@ package bpdts;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 import springfox.documentation.builders.PathSelectors;
@@ -12,19 +13,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
+@PropertySource("classpath:bpdts.properties")
 public class Config {
 
 	@Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.any())              
-          .paths(PathSelectors.regex("/bpdts-test/.*"))                          
-          .build();                                           
-    }
-	
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.regex("/bpdts-test/.*")).build();
+	}
+
 	@Bean
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
+
 }
