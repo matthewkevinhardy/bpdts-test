@@ -57,7 +57,7 @@ public class BpdtsApplication {
 
 		@ApiOperation(value = "Get users within a given radius of London")
 		@GetMapping(path = "/getUsersWithinLondonRadius", produces = MediaType.APPLICATION_JSON_VALUE)
-		public List<User> getUsersWithinLondon(@RequestParam(value = "radMiles", required = true) double radMiles) {
+		public List<User> getUsersWithinLondon(@RequestParam(value = "radMiles", required = true,defaultValue = "50") double radMiles) {
 
 			return bpdtsService.getUsersWithinRadius(LONDON_LATITUDE, LONDON_LONGITUDE, radMiles);
 		}
