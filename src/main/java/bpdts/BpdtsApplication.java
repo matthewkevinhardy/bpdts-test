@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 @SpringBootApplication
 public class BpdtsApplication {
 
@@ -36,13 +38,15 @@ public class BpdtsApplication {
 	@RestController
 	@RequestMapping("bpdts-test")
 	class BpdtsController {
-
+		
+		@ApiOperation(value = "Get all users")
 		@GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getAllUsers() {
 
 			return bpdtsService.getAllUsers();
 		}
 
+		@ApiOperation(value = "Get users from coordinates")
 		@GetMapping(path = "/coords/users", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getUsersWithinRadius(@RequestParam(value = "lat", required = true) double lat,
 				@RequestParam(value = "lng", required = true) double lng,
@@ -51,18 +55,21 @@ public class BpdtsApplication {
 			return bpdtsService.getUsersWithinRadius(lat, lng, radMiles);
 		}
 
+		@ApiOperation(value = "Get users within a given radius of London")
 		@GetMapping(path = "/getUsersWithinLondonRadius", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getUsersWithinLondon(@RequestParam(value = "radMiles", required = true) double radMiles) {
 
 			return bpdtsService.getUsersWithinRadius(LONDON_LATITUDE, LONDON_LONGITUDE, radMiles);
 		}
 		
+		@ApiOperation(value = "Get users listed in a city")
 		@GetMapping(path = "/city/{city}/users", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getCityListedUsers(@PathVariable(value = "city") String city) {
 
 			return bpdtsService.getCityListedUsers(city);
 		}
 		
+		@ApiOperation(value = "Get user listed in London")
 		@GetMapping(path = "/getLondonListedUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 		public List<User> getLondonListedUsers() {
 
