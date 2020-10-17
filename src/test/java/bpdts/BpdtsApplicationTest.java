@@ -21,7 +21,7 @@ public class BpdtsApplicationTest {
 
 	@Test
 	public void getAllUsers() throws Exception {
-		this.mockMvc.perform(get("/bpdts-test/getAllUsers")).andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(get("/bpdts-test/users")).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class BpdtsApplicationTest {
 	@Test
 	public void getUsersWithinRadius() throws Exception {
 		this.mockMvc
-				.perform(get("/bpdts-test/getUsersWithinRadius?")
+				.perform(get("/bpdts-test/coords/users?")
 						.param("lat", Double.toString(BpdtsApplication.LONDON_LATITUDE))
 						.param("lng", Double.toString(BpdtsApplication.LONDON_LONGITUDE))
 						.param("radMiles", "20"))
@@ -43,8 +43,7 @@ public class BpdtsApplicationTest {
 	
 	@Test
 	public void getCityListedUsers() throws Exception {
-		this.mockMvc.perform(get("/bpdts-test/getCityListedUsers")
-				.param("city", "Reading"))
+		this.mockMvc.perform(get("/bpdts-test/city/Reading/users"))
 				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(83)));
 	}
 	

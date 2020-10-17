@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,8 +57,8 @@ public class BpdtsApplication {
 			return bpdtsService.getUsersWithinRadius(LONDON_LATITUDE, LONDON_LONGITUDE, radMiles);
 		}
 		
-		@GetMapping(path = "/getCityListedUsers", produces = MediaType.APPLICATION_JSON_VALUE)
-		public List<User> getCityListedUsers(@RequestParam(value = "city", required = true) String city) {
+		@GetMapping(path = "/city/{city}/users", produces = MediaType.APPLICATION_JSON_VALUE)
+		public List<User> getCityListedUsers(@PathVariable(value = "city") String city) {
 
 			return bpdtsService.getCityListedUsers(city);
 		}
