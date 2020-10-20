@@ -5,13 +5,17 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 public class BpdtsService {
-
+	
+	private static final Logger LOG = LoggerFactory.getLogger(BpdtsService.class);
+	
 	private WebClient webClient;
 	
 	@Value("${bpdts.baseUrl}") 
@@ -20,6 +24,7 @@ public class BpdtsService {
 	@PostConstruct
     private void postConstruct() {
 		this.webClient = WebClient.builder().baseUrl(bpdtsBaseUrl).build();
+		LOG.info("Base URL: "+bpdtsBaseUrl);
     }
 	
 	public List<User> getAllUsers() {

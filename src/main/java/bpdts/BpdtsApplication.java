@@ -22,8 +22,6 @@ import io.swagger.annotations.ApiOperation;
 @SpringBootApplication
 public class BpdtsApplication {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BpdtsApplication.class);
-
 	public static final double LONDON_LATITUDE = 51.509865;
 	public static final double LONDON_LONGITUDE = -0.118092;
 	public static final String LONDON = "London";
