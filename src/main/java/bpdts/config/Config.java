@@ -7,7 +7,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 import bpdts.service.BpdtsRestAccessor;
+import bpdts.service.BpdtsRestAccessorImpl;
 import bpdts.service.UserService;
+import bpdts.service.UserServiceImpl;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -35,11 +37,11 @@ public class Config {
 	
 	@Bean
 	public BpdtsRestAccessor getBpdtsRestAccessor() {
-		return new BpdtsRestAccessor(bpdtsBaseUrl);
+		return new BpdtsRestAccessorImpl(bpdtsBaseUrl);
 	}
 	
 	@Bean
 	public UserService getUserService() {
-		return new UserService(getBpdtsRestAccessor());
+		return new UserServiceImpl(getBpdtsRestAccessor());
 	}
 }

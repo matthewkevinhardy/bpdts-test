@@ -13,18 +13,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import bpdts.model.User;
-import bpdts.service.BpdtsRestAccessor;
-import bpdts.service.UserService;
+import bpdts.service.BpdtsRestAccessorImpl;
+import bpdts.service.UserServiceImpl;
 
 @SpringBootTest
 class UserServiceTest {
 	
 	@Test
 	void testIsWithinRadiusPredicate() {
-		BpdtsRestAccessor restAccessorMock = mock(BpdtsRestAccessor.class);
+		BpdtsRestAccessorImpl restAccessorMock = mock(BpdtsRestAccessorImpl.class);
 		when(restAccessorMock.getAllUsers()).thenReturn(getMockUserList());
 		
-		UserService userService = new UserService(restAccessorMock);
+		UserServiceImpl userService = new UserServiceImpl(restAccessorMock);
 		
 		List<User> usersWithinRadius = getMockUserList().stream().filter(userService.isWithinRadius(1, 1, 10))
 				.collect(Collectors.toList());
@@ -34,20 +34,20 @@ class UserServiceTest {
 
 	@Test
 	void testIsWithinRadius() {
-		BpdtsRestAccessor restAccessorMock = mock(BpdtsRestAccessor.class);
+		BpdtsRestAccessorImpl restAccessorMock = mock(BpdtsRestAccessorImpl.class);
 		when(restAccessorMock.getAllUsers()).thenReturn(getMockUserList());
 		
-		UserService userService = new UserService(restAccessorMock);
+		UserServiceImpl userService = new UserServiceImpl(restAccessorMock);
 		
 		assertTrue(userService.isWithinRadius(getMockUserList().get(0), 1, 1, 10));
 	}
 
 	@Test
 	void testGetUsersWithinRadius() {
-		BpdtsRestAccessor restAccessorMock = mock(BpdtsRestAccessor.class);
+		BpdtsRestAccessorImpl restAccessorMock = mock(BpdtsRestAccessorImpl.class);
 		when(restAccessorMock.getAllUsers()).thenReturn(getMockUserList());
 		
-		UserService userService = new UserService(restAccessorMock);
+		UserServiceImpl userService = new UserServiceImpl(restAccessorMock);
 		
 		assertThat(userService.getUsersWithinRadius(1, 1, 10)).contains(getMockUserList().get(0));
 	}

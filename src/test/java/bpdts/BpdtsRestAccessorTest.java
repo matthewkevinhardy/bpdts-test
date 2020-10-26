@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import bpdts.service.BpdtsRestAccessor;
+import bpdts.service.BpdtsRestAccessorImpl;
 
 @SpringBootTest
 public class BpdtsRestAccessorTest {
 
 	@Autowired
-	private BpdtsRestAccessor bpdtsRestAccessor;
+	private BpdtsRestAccessorImpl bpdtsRestAccessor;
 
 	@Test
 	public void contextLoads() throws Exception {
