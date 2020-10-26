@@ -1,5 +1,6 @@
-package bpdts;
+package bpdts.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
@@ -25,7 +26,22 @@ public class User {
     @JsonProperty("longitude")
     private double longitude;
 	
-    public long getId() {
+    public User() {
+    	
+    }
+    
+    public User(long id, String firstName, String lastName, String email, String ipAddress, double latitude,
+			double longitude) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.ipAddress = ipAddress;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
@@ -67,19 +83,6 @@ public class User {
 	}
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
-	}
-	
-	private static final double DEGREES_TO_MILES = 69.2;
-	
-	public boolean isWithinRadius(double lat, double lng, double maxRadiusMiles) {
-		double x = this.latitude-lat;
-		double y = this.longitude-lng;
-		double radiusMiles = Math.sqrt(x*x+y*y)*DEGREES_TO_MILES;
-		
-		if(radiusMiles<=maxRadiusMiles) {
-			return true;
-		}
-		return false;
 	}
 	
 	@Override

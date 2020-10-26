@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,7 +19,16 @@ public class BpdtsApplicationTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-
+	
+	@Value("${bpdts.londonLatitude}") 
+	private double londonLatitude;
+	
+	@Value("${bpdts.londonLongitude}") 
+	private double londonLongitude;
+	
+	@Value("${bpdts.london}") 
+	private String londonName;
+	
 	@Test
 	public void getAllUsers() throws Exception {
 		this.mockMvc.perform(get("/bpdts-test/users")).andDo(print()).andExpect(status().isOk());
@@ -35,8 +45,8 @@ public class BpdtsApplicationTest {
 	public void getUsersWithinRadius() throws Exception {
 		this.mockMvc
 				.perform(get("/bpdts-test/coords/users?")
-						.param("lat", Double.toString(BpdtsApplication.LONDON_LATITUDE))
-						.param("lng", Double.toString(BpdtsApplication.LONDON_LONGITUDE))
+						.param("lat", Double.toString(londonLatitude))
+						.param("lng", Double.toString(londonLongitude))
 						.param("radMiles", "20"))
 				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(266)));
 	}
