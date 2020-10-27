@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import bpdts.exception.ResourceNotFoundException;
 import bpdts.model.User;
 import bpdts.service.BpdtsRestAccessorImpl;
 import bpdts.service.UserServiceImpl;
@@ -18,7 +19,7 @@ import bpdts.service.UserServiceImpl;
 class UserServiceTest {
 	
 	@Test
-	void testGetUsersWithinRadius() {
+	void testGetUsersWithinRadius() throws ResourceNotFoundException {
 		BpdtsRestAccessorImpl restAccessorMock = mock(BpdtsRestAccessorImpl.class);
 		when(restAccessorMock.getAllUsers()).thenReturn(getMockUserList());
 		
