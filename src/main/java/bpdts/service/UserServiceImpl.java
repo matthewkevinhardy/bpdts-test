@@ -1,7 +1,8 @@
 package bpdts.service;
 
+import static bpdts.utils.UserRadiusPredicate.isWithinRadius;
+
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import bpdts.model.User;
@@ -12,23 +13,6 @@ public class UserServiceImpl implements UserService {
 	
 	public UserServiceImpl(BpdtsRestAccessor bpdtsRestAccessor) {
 		this.bpdtsRestAccessor=bpdtsRestAccessor;
-	}
-	
-	public static final double DEGREES_TO_MILES = 69.2;
-	
-	public boolean isWithinRadius(User user,double lat, double lng, double maxRadiusMiles) {
-		double x = user.getLatitude()-lat;
-		double y = user.getLongitude()-lng;
-		double radiusMiles = Math.sqrt(x*x+y*y)*DEGREES_TO_MILES;
-		
-		if(radiusMiles<=maxRadiusMiles) {
-			return true;
-		}
-		return false;
-	}
-	
-	public Predicate<User> isWithinRadius(double lat, double lng, double radMiles) {
-		return u -> isWithinRadius(u, lat, lng, radMiles);
 	}
 	
 	public List<User> getUsersWithinRadius(double lat, double lng, double radMiles) {

@@ -1,13 +1,11 @@
 package bpdts;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,29 +18,6 @@ import bpdts.service.UserServiceImpl;
 class UserServiceTest {
 	
 	@Test
-	void testIsWithinRadiusPredicate() {
-		BpdtsRestAccessorImpl restAccessorMock = mock(BpdtsRestAccessorImpl.class);
-		when(restAccessorMock.getAllUsers()).thenReturn(getMockUserList());
-		
-		UserServiceImpl userService = new UserServiceImpl(restAccessorMock);
-		
-		List<User> usersWithinRadius = getMockUserList().stream().filter(userService.isWithinRadius(1, 1, 10))
-				.collect(Collectors.toList());
-		
-		assertThat(usersWithinRadius).contains(getMockUserList().get(0));
-	}
-
-	@Test
-	void testIsWithinRadius() {
-		BpdtsRestAccessorImpl restAccessorMock = mock(BpdtsRestAccessorImpl.class);
-		when(restAccessorMock.getAllUsers()).thenReturn(getMockUserList());
-		
-		UserServiceImpl userService = new UserServiceImpl(restAccessorMock);
-		
-		assertTrue(userService.isWithinRadius(getMockUserList().get(0), 1, 1, 10));
-	}
-
-	@Test
 	void testGetUsersWithinRadius() {
 		BpdtsRestAccessorImpl restAccessorMock = mock(BpdtsRestAccessorImpl.class);
 		when(restAccessorMock.getAllUsers()).thenReturn(getMockUserList());
@@ -51,16 +26,6 @@ class UserServiceTest {
 		
 		assertThat(userService.getUsersWithinRadius(1, 1, 10)).contains(getMockUserList().get(0));
 	}
-
-//	@Test
-//	void testGetAllUsers() {
-//		assertThat(userService.getAllUsers()).isNotEmpty();
-//	}
-//
-//	@Test
-//	void testGetCityListedUsers() {
-//		assertThat(userService.getCityListedUsers("London")).isNotEmpty();
-//	}
 	
 	private List<User> getMockUserList() {
 		List<User> mockUserList = new ArrayList<User>();
