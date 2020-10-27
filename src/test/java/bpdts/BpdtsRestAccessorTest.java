@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import bpdts.exception.ResourceNotFoundException;
 import bpdts.service.BpdtsRestAccessorImpl;
 
 @SpringBootTest
@@ -15,17 +16,17 @@ public class BpdtsRestAccessorTest {
 	private BpdtsRestAccessorImpl bpdtsRestAccessor;
 
 	@Test
-	public void contextLoads() throws Exception {
+	public void contextLoads() throws ResourceNotFoundException {
 		assertThat(bpdtsRestAccessor).isNotNull();
 	}
 
 	@Test
-	public void getAllUsers() throws Exception {
+	public void getAllUsers() throws ResourceNotFoundException {
 		assertThat(bpdtsRestAccessor.getAllUsers()).isNotEmpty();
 	}
 
 	@Test
-	public void getCityListedUsers() throws Exception {
+	public void getCityListedUsers() throws ResourceNotFoundException {
 		assertThat(bpdtsRestAccessor.getCityListedUsers("London")).isNotEmpty();
 	}
 }
