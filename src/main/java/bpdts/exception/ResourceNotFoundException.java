@@ -1,6 +1,6 @@
 package bpdts.exception;
 
-public class ResourceNotFoundException extends Exception {
+public class ResourceNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 3781719401516208328L;
 	

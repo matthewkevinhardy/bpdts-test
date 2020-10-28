@@ -38,11 +38,7 @@ public class BpdtsController {
 	@GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getAllUsers() {
 
-		try {
-			return userService.getAllUsers();
-		} catch (ResourceNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Users Not Found", e);
-		}
+		return userService.getAllUsers();
 	}
 
 	@ApiOperation(value = "Get users from coordinates")
@@ -51,11 +47,7 @@ public class BpdtsController {
 			@RequestParam(value = "lng", required = true) double lng,
 			@RequestParam(value = "radMiles", required = true) double radMiles) {
 
-		try {
-			return userService.getUsersWithinRadius(lat, lng, radMiles);
-		} catch (ResourceNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Users Not Found", e);
-		}
+		return userService.getUsersWithinRadius(lat, lng, radMiles);
 	}
 
 	@ApiOperation(value = "Get users within a given radius of London")
@@ -63,32 +55,23 @@ public class BpdtsController {
 	public List<User> getUsersWithinLondon(
 			@RequestParam(value = "radMiles", required = true, defaultValue = "50") double radMiles) {
 
-		try {
-			return userService.getUsersWithinRadius(londonLatitude, londonLongitude, radMiles);
-		} catch (ResourceNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Users Not Found", e);
-		}
+		return userService.getUsersWithinRadius(londonLatitude, londonLongitude, radMiles);
+		
 	}
 
 	@ApiOperation(value = "Get users listed in a city")
 	@GetMapping(path = "/city/{city}/users", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getCityListedUsers(@PathVariable(value = "city") String city) {
 
-		try {
-			return userService.getCityListedUsers(city);
-		} catch (ResourceNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Users Not Found", e);
-		}
+		return userService.getCityListedUsers(city);
+		
 	}
 
 	@ApiOperation(value = "Get user listed in London")
 	@GetMapping(path = "/getLondonListedUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getLondonListedUsers() {
 
-		try {
-			return userService.getCityListedUsers(londonName);
-		} catch (ResourceNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Users Not Found", e);
-		}
+		return userService.getCityListedUsers(londonName);
+		
 	}
 }

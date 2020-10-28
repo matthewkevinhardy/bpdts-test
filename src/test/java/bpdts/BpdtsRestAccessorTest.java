@@ -11,7 +11,9 @@ import bpdts.service.BpdtsRestAccessorImpl;
 
 @SpringBootTest
 public class BpdtsRestAccessorTest {
-
+	
+	//private final MockWebServer mockWebServer = new MockWebServer();
+	
 	@Autowired
 	private BpdtsRestAccessorImpl bpdtsRestAccessor;
 
