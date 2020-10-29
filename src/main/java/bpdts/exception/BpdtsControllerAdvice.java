@@ -3,6 +3,8 @@ package bpdts.exception;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,18 +18,18 @@ public class BpdtsControllerAdvice {
 	private static final Logger LOG = LoggerFactory.getLogger(BpdtsControllerAdvice.class);
 	
 	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
-		return error(HttpStatus.INTERNAL_SERVER_ERROR,e);
+	public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e,HttpServletRequest request) {
+		return error(HttpStatus.INTERNAL_SERVER_ERROR,e,request);
 	}
 	
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException e) {
-		return error(HttpStatus.NOT_FOUND,e);
+	public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException e,HttpServletRequest request) {
+		return error(HttpStatus.NOT_FOUND,e,request);
 	}
 	
-	private ResponseEntity<ErrorResponse> error(HttpStatus status, Exception e) {
+	private ResponseEntity<ErrorResponse> error(HttpStatus status, Exception e,HttpServletRequest request) {
 		LOG.error("Exception: ",e);
 		return ResponseEntity.status(status).body(
-				new ErrorResponse(status, status.value()+"", e.getMessage(), e.getMessage(), LocalDateTime.now(ZoneOffset.UTC)));
+				new ErrorResponse(status, status.value()+"", e.getMessage(), request.getRequestURI(), LocalDateTime.now(ZoneOffset.UTC)));
 	}
 }

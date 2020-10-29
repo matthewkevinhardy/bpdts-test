@@ -8,14 +8,14 @@ public class ErrorResponse {
 	private HttpStatus status;
     private String error_code;
     private String message;
-    private String detail;
+    private String path;
     private LocalDateTime timeStamp;
-	public ErrorResponse(HttpStatus status, String error_code, String message, String detail, LocalDateTime timeStamp) {
+	public ErrorResponse(HttpStatus status, String error_code, String message, String path, LocalDateTime timeStamp) {
 		super();
 		this.status = status;
 		this.error_code = error_code;
 		this.message = message;
-		this.detail = detail;
+		this.path = path;
 		this.timeStamp = timeStamp;
 	}
 	public HttpStatus getStatus() {
@@ -36,11 +36,11 @@ public class ErrorResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getDetail() {
-		return detail;
+	public String getPath() {
+		return path;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setPath(String path) {
+		this.path = path;
 	}
 	public LocalDateTime getTimeStamp() {
 		return timeStamp;
