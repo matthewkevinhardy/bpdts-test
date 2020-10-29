@@ -1,5 +1,8 @@
 package bpdts.exception;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,17 +16,18 @@ public class BpdtsControllerAdvice {
 	private static final Logger LOG = LoggerFactory.getLogger(BpdtsControllerAdvice.class);
 	
 	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<String> handleRuntimeException(RuntimeException e) {
+	public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
 		return error(HttpStatus.INTERNAL_SERVER_ERROR,e);
 	}
 	
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<String> handleRuntimeException(ResourceNotFoundException e) {
+	public ResponseEntity<ErrorResponse> handleRuntimeException(ResourceNotFoundException e) {
 		return error(HttpStatus.NOT_FOUND,e);
 	}
 	
-	private ResponseEntity<String> error(HttpStatus status, Exception e) {
+	private ResponseEntity<ErrorResponse> error(HttpStatus status, Exception e) {
 		LOG.error("Exception: ",e);
-		return ResponseEntity.status(status).body(e.getMessage());
+		return ResponseEntity.status(status).body(
+				new ErrorResponse(status, status.value()+"", e.getMessage(), e.getMessage(), LocalDateTime.now(ZoneOffset.UTC)));
 	}
 }
