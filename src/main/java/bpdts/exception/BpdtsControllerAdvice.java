@@ -21,7 +21,7 @@ public class BpdtsControllerAdvice {
 	}
 	
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<ErrorResponse> handleRuntimeException(ResourceNotFoundException e) {
+	public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException e) {
 		return error(HttpStatus.NOT_FOUND,e);
 	}
 	
