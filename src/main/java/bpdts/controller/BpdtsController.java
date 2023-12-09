@@ -16,7 +16,7 @@ import bpdts.service.UserService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("bpdts-test")
+@RequestMapping("/api/v1")
 public class BpdtsController {
 
 	@Value("${bpdts.londonLatitude}")
@@ -53,7 +53,7 @@ public class BpdtsController {
 			@RequestParam(value = "radMiles", required = true, defaultValue = "50") double radMiles) {
 
 		return userService.getUsersWithinRadius(londonLatitude, londonLongitude, radMiles);
-		
+
 	}
 
 	@ApiOperation(value = "Get users listed in a city")
@@ -61,7 +61,7 @@ public class BpdtsController {
 	public List<User> getCityListedUsers(@PathVariable(value = "city") String city) {
 
 		return userService.getCityListedUsers(city);
-		
+
 	}
 
 	@ApiOperation(value = "Get user listed in London")
@@ -69,6 +69,6 @@ public class BpdtsController {
 	public List<User> getLondonListedUsers() {
 
 		return userService.getCityListedUsers(londonName);
-		
+
 	}
 }

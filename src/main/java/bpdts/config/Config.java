@@ -1,7 +1,10 @@
 package bpdts.config;
 
+import javax.servlet.ServletContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,34 +26,39 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @PropertySource("classpath:bpdts.properties")
 public class Config {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(Config.class);
-	
-	@Value("${bpdts.baseUrl}") 
+
+	@Autowired
+	private ServletContext context;
+
+	@Value("${bpdts.baseUrl}")
 	private String bpdtsBaseUrl;
-	
+
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.regex("/bpdts-test/.*")).build();
+		Docket docket = new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.regex(context.getContextPath() + "/api/v1/.*")).build();
+
+		return docket;
 	}
-	
+
 	@Bean
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
-	
+
 	@Bean
 	public WebClient getBpdtsWebClient() {
-		LOG.info("Base URL: "+bpdtsBaseUrl);
+		LOG.info("Base URL: " + bpdtsBaseUrl);
 		return WebClient.builder().baseUrl(bpdtsBaseUrl).build();
 	}
-	
+
 	@Bean
 	public BpdtsRestAccessor getBpdtsRestAccessor() {
 		return new BpdtsRestAccessorImpl(getBpdtsWebClient());
 	}
-	
+
 	@Bean
 	public UserService getUserService() {
 		return new UserServiceImpl(getBpdtsRestAccessor());
