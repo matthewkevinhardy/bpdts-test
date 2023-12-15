@@ -1,2 +1,2 @@
 # bpdts-test
-API documentation here: <a href='https://mkhardy-bpdts-test.herokuapp.com/'>https://mkhardy-bpdts-test.herokuapp.com/</a>
+API documentation here: <a href="https://mkhardy.uk.to/bpdts-test/swagger-ui/index.html">mkhardy.uk.to/bpdts-test/swagger-ui</a>
