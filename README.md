@@ -1,2 +1,2 @@
 # bpdts-test
-API documentation here: <a href="https://mkhardy.uk.to/bpdts-test/swagger-ui/index.html">mkhardy.uk.to/bpdts-test/swagger-ui</a>
+API documentation here: <a href="https://mkhardy.co.uk/bpdts-test/swagger-ui/index.html">mkhardy.co.uk/bpdts-test/swagger-ui</a>
